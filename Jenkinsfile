@@ -7,7 +7,7 @@ pipeline {
                 script {
                     def dotnetPath = "$HOME/.dotnet"
                     sh '''
-                    wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+                    curl -sSL https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh
                     chmod +x dotnet-install.sh
                     ./dotnet-install.sh --version 6.0.x
                     export DOTNET_ROOT=$HOME/.dotnet
