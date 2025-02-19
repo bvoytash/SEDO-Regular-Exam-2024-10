@@ -15,7 +15,7 @@ pipeline {
         
         stage('Run Unit Tests') {
             steps {
-                sh 'dotnet test HouseRentingSystem.Tests/HouseRentingSystem.Tests.csproj --no-build --verbosity normal'
+                sh 'dotnet test --no-build --verbosity normal'
             }
         }
     }
