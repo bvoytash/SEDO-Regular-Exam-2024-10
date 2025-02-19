@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+    stages {
         stage('Restore dependencies') {
             steps {
                 sh 'dotnet restore'
