@@ -1,6 +1,22 @@
 pipeline {
     agent any
+
     stages {
+        stage('Setup .NET') {
+            steps {
+                script {
+                    def dotnetPath = "$HOME/.dotnet"
+                    sh '''
+                    wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+                    chmod +x dotnet-install.sh
+                    ./dotnet-install.sh --version 6.0.x
+                    export DOTNET_ROOT=$HOME/.dotnet
+                    export PATH=$DOTNET_ROOT:$PATH
+                    '''
+                }
+            }
+        }
+
         stage('Restore dependencies') {
             steps {
                 sh 'dotnet restore'
