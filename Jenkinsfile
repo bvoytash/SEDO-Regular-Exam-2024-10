@@ -6,7 +6,7 @@ pipeline {
             steps {
                 // Restore NuGet packages
                 script {
-                    bat 'dotnet restore'
+                    sh 'dotnet restore'
                 }
             }
         }
@@ -15,7 +15,7 @@ pipeline {
             steps {
                 // Build the project
                 script {
-                    bat 'dotnet build --configuration Release'
+                    sh 'dotnet build --configuration Release'
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 // Run tests
                 script {
-                    bat 'dotnet test'
+                    sh 'dotnet test'
                 }
             }
         }
