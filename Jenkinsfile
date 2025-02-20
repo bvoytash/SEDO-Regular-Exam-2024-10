@@ -1,5 +1,8 @@
 pipeline {
     agent any 
+    tools {
+        dotnet 'dotnet-sdk' // Refer to the name configured in the previous step
+    }
 
     stages {
         stage('Restore') {
