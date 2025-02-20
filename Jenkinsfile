@@ -1,13 +1,9 @@
 pipeline {
     agent any 
-    tools {
-        dotnet 'dotnet-sdk' // Refer to the name configured in the previous step
-    }
 
     stages {
         stage('Restore') {
             steps {
-                // Restore NuGet packages
                 script {
                     sh 'dotnet restore'
                 }
@@ -16,7 +12,6 @@ pipeline {
 
         stage('Build') {
             steps {
-                // Build the project
                 script {
                     sh 'dotnet build --configuration Release'
                 }
@@ -25,7 +20,6 @@ pipeline {
 
         stage('Test') {
             steps {
-                // Run tests
                 script {
                     sh 'dotnet test'
                 }
