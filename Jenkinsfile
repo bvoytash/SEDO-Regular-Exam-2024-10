@@ -1,42 +1,66 @@
 pipeline {
-    agent any
-
-    environment {
-        DOTNET_VERSION = "6.0.x"
-    }
+    agent any 
 
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                // Checkout the code from the repository
+                git 'https://github.com/your-repo/your-dotnet-project.git'
             }
         }
 
-        stage('Verify .NET Installation') {
+        stage('Restore') {
             steps {
+                // Restore NuGet packages
                 script {
-                    // Verify the .NET installation using the version command
-                    sh 'dotnet --version'
+                    bat 'dotnet restore'
                 }
-            }
-        }
-
-        stage('Restore dependencies') {
-            steps {
-                sh 'dotnet restore'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'dotnet build --no-restore'
+                // Build the project
+                script {
+                    bat 'dotnet build --configuration Release'
+                }
             }
         }
 
-        stage('Run Unit Tests') {
+        stage('Test') {
             steps {
-                sh 'dotnet test --no-build --verbosity normal'
+                // Run tests
+                script {
+                    bat 'dotnet test'
+                }
             }
+        }
+
+        stage('Publish') {
+            steps {
+                // Publish the application
+                script {
+                    bat 'dotnet publish --configuration Release --output ./publish'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Deploy the application (customize this step based on your deployment strategy)
+                script {
+                    bat 'powershell -File deploy.ps1'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build and deployment succeeded!'
+        }
+        failure {
+            echo 'Build or deployment failed.'
         }
     }
 }
