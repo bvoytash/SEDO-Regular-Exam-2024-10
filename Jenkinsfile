@@ -12,13 +12,10 @@ pipeline {
             }
         }
 
-        stage('Setup .NET') {
+        stage('Verify .NET Installation') {
             steps {
                 script {
-                    // Install .NET SDK using Homebrew
-                    sh 'brew install --cask dotnet-sdk'
-                    
-                    // Verify installation
+                    // Verify the .NET installation using the version command
                     sh 'dotnet --version'
                 }
             }
