@@ -1,11 +1,15 @@
 pipeline {
-    agent any 
+    agent any
 
     stages {
         stage('Restore') {
             steps {
                 script {
-                    sh 'dotnet restore'
+                    if (isUnix()) {
+                        sh 'dotnet restore'
+                    } else {
+                        bat 'dotnet restore'
+                    }
                 }
             }
         }
@@ -13,7 +17,11 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh 'dotnet build --configuration Release'
+                    if (isUnix()) {
+                        sh 'dotnet build --configuration Release'
+                    } else {
+                        bat 'dotnet build --configuration Release'
+                    }
                 }
             }
         }
@@ -21,7 +29,11 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    sh 'dotnet test'
+                    if (isUnix()) {
+                        sh 'dotnet test'
+                    } else {
+                        bat 'dotnet test'
+                    }
                 }
             }
         }
