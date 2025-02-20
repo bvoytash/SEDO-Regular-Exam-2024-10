@@ -2,13 +2,6 @@ pipeline {
     agent any 
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout the code from the repository
-                git 'https://github.com/your-repo/your-dotnet-project.git'
-            }
-        }
-
         stage('Restore') {
             steps {
                 // Restore NuGet packages
