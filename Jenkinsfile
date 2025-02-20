@@ -15,11 +15,11 @@ pipeline {
         stage('Setup .NET') {
             steps {
                 script {
-                    sh 'sudo apt-get update && sudo apt-get install -y wget'
-                    sh 'wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb'
-                    sh 'sudo dpkg -i packages-microsoft-prod.deb'
-                    sh 'rm packages-microsoft-prod.deb'
-                    sh 'sudo apt-get update; sudo apt-get install -y dotnet-sdk-6.0'
+                    // Install .NET SDK using Homebrew
+                    sh 'brew install --cask dotnet-sdk'
+                    
+                    // Verify installation
+                    sh 'dotnet --version'
                 }
             }
         }
