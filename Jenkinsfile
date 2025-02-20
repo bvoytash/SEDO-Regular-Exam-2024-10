@@ -28,32 +28,5 @@ pipeline {
                 }
             }
         }
-
-        stage('Publish') {
-            steps {
-                // Publish the application
-                script {
-                    bat 'dotnet publish --configuration Release --output ./publish'
-                }
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                // Deploy the application (customize this step based on your deployment strategy)
-                script {
-                    bat 'powershell -File deploy.ps1'
-                }
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Build and deployment succeeded!'
-        }
-        failure {
-            echo 'Build or deployment failed.'
-        }
     }
 }
